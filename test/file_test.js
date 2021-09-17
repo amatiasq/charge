@@ -3,7 +3,7 @@ import { join as pathJoin } from "path"
 import File from "../lib/file"
 
 test("#extensions handles one extension", async (t) => {
-  let file = new File({
+  const file = new File({
     path: "/",
     relativePath: "index.html",
   })
@@ -12,7 +12,7 @@ test("#extensions handles one extension", async (t) => {
 })
 
 test("#extensions handles two extensions", async (t) => {
-  let file = new File({
+  const file = new File({
     path: "/",
     relativePath: "index.html.jsx",
   })
@@ -21,7 +21,7 @@ test("#extensions handles two extensions", async (t) => {
 })
 
 test("#extensions handles a path with a period in it", async (t) => {
-  let file = new File({
+  const file = new File({
     path: "/",
     relativePath: pathJoin("test.com", "index.html.jsx"),
   })
@@ -30,7 +30,7 @@ test("#extensions handles a path with a period in it", async (t) => {
 })
 
 test("#_extension handles one extension", async (t) => {
-  let file = new File({
+  const file = new File({
     path: "/",
     relativePath: "index.html",
   })
@@ -39,7 +39,7 @@ test("#_extension handles one extension", async (t) => {
 })
 
 test("#_extension handles two extensions", async (t) => {
-  let file = new File({
+  const file = new File({
     path: "/",
     relativePath: "index.html.jsx",
   })
@@ -48,7 +48,7 @@ test("#_extension handles two extensions", async (t) => {
 })
 
 test("#_extension handles a path with a period in it", async (t) => {
-  let file = new File({
+  const file = new File({
     path: "/",
     relativePath: pathJoin("test.com", "index.html.jsx"),
   })

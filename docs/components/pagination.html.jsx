@@ -13,17 +13,17 @@ const Pagination = styled.div`
 `
 
 export default ({ currentPageID, pages }) => {
-  let sortedPages = navItems.reduce((array, navItem) => {
-    let page = pages.find((page) => page.meta.id === navItem.id)
+  const sortedPages = navItems.reduce((array, navItem) => {
+    const page = pages.find((page) => page.meta.id === navItem.id)
     array.push(page)
 
     return array
   }, [])
 
-  let currentPage = pages.find((page) => page.meta.id === currentPageID)
-  let currentPageIndex = sortedPages.indexOf(currentPage)
-  let previousPage = sortedPages[currentPageIndex - 1]
-  let nextPage = sortedPages[currentPageIndex + 1]
+  const currentPage = pages.find((page) => page.meta.id === currentPageID)
+  const currentPageIndex = sortedPages.indexOf(currentPage)
+  const previousPage = sortedPages[currentPageIndex - 1]
+  const nextPage = sortedPages[currentPageIndex + 1]
 
   return (
     <Pagination>

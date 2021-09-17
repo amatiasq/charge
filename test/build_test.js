@@ -115,7 +115,7 @@ test("passes the page component in the `pages` prop", async (t) => {
             {
               pages.map(
                 (page) => {
-                  let Component = page.component
+                  const Component = page.component
 
                   return <Component key={page.path} pages={[]} />
                 }

@@ -20,10 +20,14 @@ test("serves the root page", async (t) => {
     "index.html": "foo",
   })
 
-  let browserSyncInstance = await serve({ source: sourceDirectory, openBrowser: false, port: 3000 })
-  let server = browserSyncInstance.server
+  const browserSyncInstance = await serve({
+    source: sourceDirectory,
+    openBrowser: false,
+    port: 3000,
+  })
+  const server = browserSyncInstance.server
 
-  let response = await request(server).get("/")
+  const response = await request(server).get("/")
 
   t.is(response.status, 200)
   t.is(response.headers["content-type"], "text/html; charset=UTF-8")
@@ -39,10 +43,14 @@ test("serves a named page without the extension", async (t) => {
     "named.html": "foo",
   })
 
-  let browserSyncInstance = await serve({ source: sourceDirectory, openBrowser: false, port: 3000 })
-  let server = browserSyncInstance.server
+  const browserSyncInstance = await serve({
+    source: sourceDirectory,
+    openBrowser: false,
+    port: 3000,
+  })
+  const server = browserSyncInstance.server
 
-  let response = await request(server).get("/named")
+  const response = await request(server).get("/named")
 
   t.is(response.status, 200)
   t.is(response.headers["content-type"], "text/html; charset=UTF-8")
@@ -58,10 +66,14 @@ test("serves a named page with the extension", async (t) => {
     "named.html": "foo",
   })
 
-  let browserSyncInstance = await serve({ source: sourceDirectory, openBrowser: false, port: 3000 })
-  let server = browserSyncInstance.server
+  const browserSyncInstance = await serve({
+    source: sourceDirectory,
+    openBrowser: false,
+    port: 3000,
+  })
+  const server = browserSyncInstance.server
 
-  let response = await request(server).get("/named.html")
+  const response = await request(server).get("/named.html")
 
   t.is(response.status, 200)
   t.is(response.headers["content-type"], "text/html; charset=UTF-8")
@@ -73,10 +85,14 @@ test("serves a named page with the extension", async (t) => {
 test("redirects a URL with an ending slash", async (t) => {
   t.plan(2)
 
-  let browserSyncInstance = await serve({ source: sourceDirectory, openBrowser: false, port: 3000 })
-  let server = browserSyncInstance.server
+  const browserSyncInstance = await serve({
+    source: sourceDirectory,
+    openBrowser: false,
+    port: 3000,
+  })
+  const server = browserSyncInstance.server
 
-  let response = await request(server).get("/named/")
+  const response = await request(server).get("/named/")
 
   t.is(response.status, 302)
   t.is(response.headers.location, "/named")

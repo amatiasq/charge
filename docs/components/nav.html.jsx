@@ -98,9 +98,9 @@ const GitHubNavLink = styled(GitHubLink)`
 `
 
 export default ({ currentPageID, pages }) => {
-  let links = navItems.map((navItem) => {
-    let page = pages.find((page) => page.meta.id === navItem.id)
-    let className = page.meta.id === currentPageID ? "active" : ""
+  const links = navItems.map((navItem) => {
+    const page = pages.find((page) => page.meta.id === navItem.id)
+    const className = page.meta.id === currentPageID ? "active" : ""
 
     return (
       <NavLink className={className} key={page.path} href={page.path}>

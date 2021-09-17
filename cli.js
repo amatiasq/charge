@@ -12,7 +12,7 @@ const cli = meow(`
     ❯ charge build <source directory> <target directory>
 `)
 
-let command = cli.input[0]
+const command = cli.input[0]
 
 switch (command) {
   case undefined:
@@ -24,7 +24,7 @@ switch (command) {
     })
   case "serve":
   case "server":
-    let serveCLI = meow(
+    const serveCLI = meow(
       `
       Usage
         ❯ charge serve <source directory>

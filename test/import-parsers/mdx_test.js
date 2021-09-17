@@ -19,8 +19,8 @@ test("parses no imports", async (t) => {
     `,
   })
 
-  let path = pathJoin(sourceDirectory, "index.html.mdx")
-  let imports = jsxImportParser(path)
+  const path = pathJoin(sourceDirectory, "index.html.mdx")
+  const imports = jsxImportParser(path)
 
   t.deepEqual(imports, [])
 })
@@ -36,8 +36,8 @@ test("parses imports", async (t) => {
     `,
   })
 
-  let path = pathJoin(sourceDirectory, "index.html.mdx")
-  let imports = jsxImportParser(path)
+  const path = pathJoin(sourceDirectory, "index.html.mdx")
+  const imports = jsxImportParser(path)
 
   t.deepEqual(imports, [pathJoin(sourceDirectory, "subheading.html.mdx")])
 })

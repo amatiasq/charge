@@ -5,7 +5,7 @@ import chalk from "chalk"
 const { grey, underline } = chalk
 
 test("group, icon, and label", async (t) => {
-  let logger = new Logger({
+  const logger = new Logger({
     groups: {
       group: {
         action: {
@@ -16,7 +16,7 @@ test("group, icon, and label", async (t) => {
     },
   })
 
-  let output = stdout.inspectSync(() => {
+  const output = stdout.inspectSync(() => {
     logger.group.action("message")
   })
 
@@ -24,7 +24,7 @@ test("group, icon, and label", async (t) => {
 })
 
 test("label color", async (t) => {
-  let logger = new Logger({
+  const logger = new Logger({
     groups: {
       group: {
         action: {
@@ -36,7 +36,7 @@ test("label color", async (t) => {
     },
   })
 
-  let output = stdout.inspectSync(() => {
+  const output = stdout.inspectSync(() => {
     logger.group.action("message")
   })
 
@@ -46,7 +46,7 @@ test("label color", async (t) => {
 })
 
 test("align groups", async (t) => {
-  let logger = new Logger({
+  const logger = new Logger({
     groups: {
       short: {
         action: {
@@ -63,7 +63,7 @@ test("align groups", async (t) => {
     },
   })
 
-  let output = stdout.inspectSync(() => {
+  const output = stdout.inspectSync(() => {
     logger.short.action("message")
     logger.longlong.action("message")
   })
@@ -75,7 +75,7 @@ test("align groups", async (t) => {
 })
 
 test("align labels", async (t) => {
-  let logger = new Logger({
+  const logger = new Logger({
     groups: {
       group: {
         short: {
@@ -92,7 +92,7 @@ test("align labels", async (t) => {
     actions: {},
   })
 
-  let output = stdout.inspectSync(() => {
+  const output = stdout.inspectSync(() => {
     logger.group.short("message")
     logger.group.longlong("message")
   })
@@ -104,7 +104,7 @@ test("align labels", async (t) => {
 })
 
 test("disabled", async (t) => {
-  let logger = new Logger({
+  const logger = new Logger({
     groups: {
       group: {
         action: {
@@ -116,7 +116,7 @@ test("disabled", async (t) => {
     disabled: true,
   })
 
-  let output = stdout.inspectSync(() => {
+  const output = stdout.inspectSync(() => {
     logger.group.action("message")
   })
 

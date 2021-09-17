@@ -1,7 +1,7 @@
 export default ({ environment }) => {
-  let isProduction = environment === "production"
+  const isProduction = environment === "production"
 
-  let scriptBody = `
+  const scriptBody = `
     (function(f, a, t, h, o, m){
     a[h]=a[h]||function(){
     (a[h].q=a[h].q||[]).push(arguments)
@@ -15,7 +15,7 @@ export default ({ environment }) => {
     fathom('trackPageview');
   `
 
-  let script = {
+  const script = {
     __html: scriptBody,
   }
 

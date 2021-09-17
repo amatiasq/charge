@@ -20,7 +20,7 @@ Charge is an opinionated, zero-config static site generator written in JavaScrip
 
 ### Why?
 
-Yeah, I know, another static site generator. Let me be clear, I really did not want to make a static site generator. It’s really the very last thing I wanted to do.
+Yeah, I know, another static site generator. const me be clear, I really did not want to make a static site generator. It’s really the very last thing I wanted to do.
 
 I went on [StaticGen][static-gen] and looked at every JavaScript-based one. I could not find a single one that I thought was simple, well-documented, had the features I needed, was actively maintained, and was designed and worked the way I wanted. So here I am, making a static site generator.
 

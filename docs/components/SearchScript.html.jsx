@@ -1,5 +1,5 @@
 export default () => {
-  let scriptBody = `
+  const scriptBody = `
     docsearch({
       apiKey: "6545f73da01945206027140a6115a630",
       indexName: "brandonweiss_charge",
@@ -8,7 +8,7 @@ export default () => {
     })
   `
 
-  let script = {
+  const script = {
     __html: scriptBody,
   }
 

@@ -84,7 +84,7 @@ test("renders an MDX page with syntax highlighting", async (t) => {
     await createSourceFiles({
       "index.html.mdx": `
         \`\`\`javascript
-          let foo = "bar"
+          const foo = "bar"
         \`\`\`
       `,
     })

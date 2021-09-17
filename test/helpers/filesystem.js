@@ -10,11 +10,11 @@ const packageDirectory = "node_modules"
 export const sourceDirectory = pathJoin(tmpPathPrefix, "source")
 export const targetDirectory = pathJoin(tmpPathPrefix, "target")
 
-let flattenFilePath = (pathPart, directoryOrFileContents) => {
+const flattenFilePath = (pathPart, directoryOrFileContents) => {
   pathPart = pathPart.replace(/\//g, pathSeparator)
 
   return Object.entries(directoryOrFileContents).reduce((flattenedFilePaths, [key, value]) => {
-    let path = pathJoin(pathPart, key)
+    const path = pathJoin(pathPart, key)
 
     if (typeof value === "object") {
       Object.assign(flattenedFilePaths, flattenFilePath(path, value))
@@ -29,14 +29,14 @@ let flattenFilePath = (pathPart, directoryOrFileContents) => {
 export const createData = async (data) => {
   await Promise.all(
     Object.entries(data).map(([namespace, contents]) => {
-      let path = pathJoin(dataDirectory, `${namespace}.json`)
+      const path = pathJoin(dataDirectory, `${namespace}.json`)
       return fs.outputFile(path, dedent(contents))
     }),
   )
 }
 
 const createFiles = async (directory, files) => {
-  let flattenedFilePaths = flattenFilePath(directory, files)
+  const flattenedFilePaths = flattenFilePath(directory, files)
 
   await Promise.all(
     Object.entries(flattenedFilePaths).map(([filePath, fileContents]) => {
@@ -56,7 +56,7 @@ export const createTargetFiles = async (files) => {
 export const createPackage = async (name, files) => {
   await Promise.all(
     Object.entries(files).map(([filePath, fileContents]) => {
-      let path = pathJoin(packageDirectory, name, filePath)
+      const path = pathJoin(packageDirectory, name, filePath)
       return fs.outputFile(path, dedent(fileContents))
     }),
   )
@@ -67,7 +67,7 @@ export const cleanFiles = async () => {
 }
 
 const snapshotDirectoryStructure = (t) => {
-  let files = globSyncNormalize(`${targetDirectory}/**/*`, {
+  const files = globSyncNormalize(`${targetDirectory}/**/*`, {
     nodir: true,
   })
 
@@ -83,7 +83,7 @@ const snapshotDirectoryStructure = (t) => {
 }
 
 const snapshotFileContents = (t) => {
-  let files = globSyncNormalize(`${targetDirectory}/**/*`, {
+  const files = globSyncNormalize(`${targetDirectory}/**/*`, {
     nodir: true,
   })
 
@@ -95,8 +95,8 @@ const snapshotFileContents = (t) => {
     return file
   })
 
-  let targetFilesystem = files.reduce((filesystem, file) => {
-    let fileContents = fs.readFileSync(file).toString()
+  const targetFilesystem = files.reduce((filesystem, file) => {
+    const fileContents = fs.readFileSync(file).toString()
     filesystem[file] = fileContents
     return filesystem
   }, {})

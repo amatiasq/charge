@@ -10,16 +10,16 @@ import SearchScript from "./components/SearchScript.html.jsx"
 import Tracking from "./components/tracking.html.jsx"
 
 export default ({ children, currentPageID, environment, pages }) => {
-  let currentPage = pages.find((page) => page.meta.id === currentPageID)
-  let pageTitle =
+  const currentPage = pages.find((page) => page.meta.id === currentPageID)
+  const pageTitle =
     currentPageID === "about"
       ? "Charge — an opinionated, zero-config static site generator"
       : `${currentPage.meta.title} — Charge`
-  let openGraphTitle = currentPageID === "about" ? "Charge" : `${currentPage.meta.title} — Charge`
-  let description = "An opinionated, zero-config static site generator"
+  const openGraphTitle = currentPageID === "about" ? "Charge" : `${currentPage.meta.title} — Charge`
+  const description = "An opinionated, zero-config static site generator"
 
-  let baseURL = "https://charge.js.org"
-  let url = resolveURL(baseURL, currentPage.path)
+  const baseURL = "https://charge.js.org"
+  const url = resolveURL(baseURL, currentPage.path)
   if (url.endsWith("/")) {
     url = url.slice(0, -1)
   }
@@ -83,7 +83,7 @@ export default ({ children, currentPageID, environment, pages }) => {
             <div style={{ marginTop: "4rem" }}>
               <small>
                 If you find any part of the docs confusing or insufficient please{" "}
-                <a href="mailto:brandon@anti-pattern.com">let me know</a> so I can improve them!
+                <a href="mailto:brandon@anti-pattern.com">const me know</a> so I can improve them!
               </small>
             </div>
           </footer>
