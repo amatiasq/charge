@@ -1,19 +1,19 @@
-import test from "ava"
+import test from 'ava'
 import {
   buildAndSnapshotFilesystem,
   createData,
   createSourceFiles,
   cleanFiles,
   dataDirectory,
-} from "../helpers/filesystem"
+} from '../helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("renders a JSX template as XML", async (t) => {
+test('renders a JSX template as XML', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "feed.xml.jsx": `
+      'feed.xml.jsx': `
         export default () => {
           return <feed></feed>
         }
@@ -22,7 +22,7 @@ test("renders a JSX template as XML", async (t) => {
   })
 })
 
-test("loads data from data files and passes it to the JSX template", async (t) => {
+test('loads data from data files and passes it to the JSX template', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createData({
       stuff: `
@@ -33,7 +33,7 @@ test("loads data from data files and passes it to the JSX template", async (t) =
     })
 
     await createSourceFiles({
-      "feed.xml.jsx": `
+      'feed.xml.jsx': `
         export default (props) => {
           return <feed>{props.data.stuff.foo}</feed>
         }

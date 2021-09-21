@@ -25,7 +25,8 @@
   "scripts": {
     "docs": "node cli.js serve docs",
     "test": "ava --verbose --serial",
-    "test:watch": "npm test --watch"
+    "test:watch": "npm test --watch",
+    "fix-styles": "prettier --write lib/**/*.js test/**/*.js *.js"
   },
   "devDependencies": {
     "@ava/babel": "^1.0.1",
@@ -78,9 +79,10 @@
     }
   },
   "prettier": {
-    "arrowParens": "always",
-    "printWidth": 100,
     "semi": false,
-    "trailingComma": "all"
+    "endOfLine": "lf",
+    "trailingComma": "all",
+    "singleQuote": true,
+    "arrowParens": "avoid"
   }
 }

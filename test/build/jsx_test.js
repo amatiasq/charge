@@ -1,19 +1,19 @@
-import test from "ava"
+import test from 'ava'
 import {
   buildAndSnapshotFilesystem,
   createData,
   createSourceFiles,
   cleanFiles,
   dataDirectory,
-} from "../helpers/filesystem"
+} from '../helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("renders a JSX page as HTML", async (t) => {
+test('renders a JSX page as HTML', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.html.jsx": `
+      'index.html.jsx': `
         export default () => {
           return <div></div>
         }
@@ -22,15 +22,15 @@ test("renders a JSX page as HTML", async (t) => {
   })
 })
 
-test("renders a JSX page as HTML with a JSX component", async (t) => {
+test('renders a JSX page as HTML with a JSX component', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "paragraph-component.html.jsx": `
+      'paragraph-component.html.jsx': `
         export default (props) => {
           return <p>{props.foo}</p>
         }
       `,
-      "index.html.jsx": `
+      'index.html.jsx': `
         import ParagraphComponent from "./paragraph-component.html.jsx"
 
         export default () => {
@@ -45,13 +45,13 @@ test("renders a JSX page as HTML with a JSX component", async (t) => {
   })
 })
 
-test("renders a JSX page as HTML with an MDX component", async (t) => {
+test('renders a JSX page as HTML with an MDX component', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "subheading.html.mdx": `
+      'subheading.html.mdx': `
         ## Subheading
       `,
-      "index.html.jsx": `
+      'index.html.jsx': `
         import Subheading from "./subheading.html.mdx"
 
         export default () => {
@@ -68,15 +68,15 @@ test("renders a JSX page as HTML with an MDX component", async (t) => {
   })
 })
 
-test("renders a JSX page as HTML with a JSX component as a layout", async (t) => {
+test('renders a JSX page as HTML with a JSX component as a layout', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "layout-component.html.jsx": `
+      'layout-component.html.jsx': `
         export default (props) => {
           return <div>{props.children}</div>
         }
       `,
-      "index.html.jsx": `
+      'index.html.jsx': `
         import LayoutComponent from "./layout-component.html.jsx"
 
         export default () => {
@@ -91,7 +91,7 @@ test("renders a JSX page as HTML with a JSX component as a layout", async (t) =>
   })
 })
 
-test("loads data from data files and passes it to the JSX page", async (t) => {
+test('loads data from data files and passes it to the JSX page', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createData({
       stuff: `
@@ -102,7 +102,7 @@ test("loads data from data files and passes it to the JSX page", async (t) => {
     })
 
     await createSourceFiles({
-      "index.html.jsx": `
+      'index.html.jsx': `
         export default (props) => {
           return <p>{props.data.stuff.foo}</p>
         }

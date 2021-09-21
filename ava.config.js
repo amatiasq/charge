@@ -1,5 +1,5 @@
 export default {
   babel: true,
-  ignoredByWatcher: ["!tmp/**/*"],
-  require: ["esm"],
+  ignoredByWatcher: ['!tmp/**/*'],
+  require: ['esm'],
 }

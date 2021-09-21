@@ -1,23 +1,23 @@
-import test from "ava"
-import request from "supertest"
-import { join as pathJoin } from "path"
-import serve from "../lib/serve"
-import dedent from "dedent"
+import test from 'ava'
+import request from 'supertest'
+import { join as pathJoin } from 'path'
+import serve from '../lib/serve'
+import dedent from 'dedent'
 import {
   createSourceFiles,
   cleanFiles,
   sourceDirectory,
   targetDirectory,
-} from "./helpers/filesystem"
+} from './helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("serves the root page", async (t) => {
+test('serves the root page', async t => {
   t.plan(3)
 
   await createSourceFiles({
-    "index.html": "foo",
+    'index.html': 'foo',
   })
 
   const browserSyncInstance = await serve({
@@ -27,20 +27,20 @@ test("serves the root page", async (t) => {
   })
   const server = browserSyncInstance.server
 
-  const response = await request(server).get("/")
+  const response = await request(server).get('/')
 
   t.is(response.status, 200)
-  t.is(response.headers["content-type"], "text/html; charset=UTF-8")
-  t.is(response.text, "foo")
+  t.is(response.headers['content-type'], 'text/html; charset=UTF-8')
+  t.is(response.text, 'foo')
 
   browserSyncInstance.publicInstance.exit()
 })
 
-test("serves a named page without the extension", async (t) => {
+test('serves a named page without the extension', async t => {
   t.plan(3)
 
   await createSourceFiles({
-    "named.html": "foo",
+    'named.html': 'foo',
   })
 
   const browserSyncInstance = await serve({
@@ -50,20 +50,20 @@ test("serves a named page without the extension", async (t) => {
   })
   const server = browserSyncInstance.server
 
-  const response = await request(server).get("/named")
+  const response = await request(server).get('/named')
 
   t.is(response.status, 200)
-  t.is(response.headers["content-type"], "text/html; charset=UTF-8")
-  t.is(response.text, "foo")
+  t.is(response.headers['content-type'], 'text/html; charset=UTF-8')
+  t.is(response.text, 'foo')
 
   browserSyncInstance.publicInstance.exit()
 })
 
-test("serves a named page with the extension", async (t) => {
+test('serves a named page with the extension', async t => {
   t.plan(3)
 
   await createSourceFiles({
-    "named.html": "foo",
+    'named.html': 'foo',
   })
 
   const browserSyncInstance = await serve({
@@ -73,16 +73,16 @@ test("serves a named page with the extension", async (t) => {
   })
   const server = browserSyncInstance.server
 
-  const response = await request(server).get("/named.html")
+  const response = await request(server).get('/named.html')
 
   t.is(response.status, 200)
-  t.is(response.headers["content-type"], "text/html; charset=UTF-8")
-  t.is(response.text, "foo")
+  t.is(response.headers['content-type'], 'text/html; charset=UTF-8')
+  t.is(response.text, 'foo')
 
   browserSyncInstance.publicInstance.exit()
 })
 
-test("redirects a URL with an ending slash", async (t) => {
+test('redirects a URL with an ending slash', async t => {
   t.plan(2)
 
   const browserSyncInstance = await serve({
@@ -92,10 +92,10 @@ test("redirects a URL with an ending slash", async (t) => {
   })
   const server = browserSyncInstance.server
 
-  const response = await request(server).get("/named/")
+  const response = await request(server).get('/named/')
 
   t.is(response.status, 302)
-  t.is(response.headers.location, "/named")
+  t.is(response.headers.location, '/named')
 
   browserSyncInstance.publicInstance.exit()
 })

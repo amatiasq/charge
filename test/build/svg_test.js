@@ -1,13 +1,17 @@
-import test from "ava"
-import { buildAndSnapshotFilesystem, createSourceFiles, cleanFiles } from "../helpers/filesystem"
+import test from 'ava'
+import {
+  buildAndSnapshotFilesystem,
+  createSourceFiles,
+  cleanFiles,
+} from '../helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("copies an SVG from source to target", async (t) => {
+test('copies an SVG from source to target', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "icon.svg": `
+      'icon.svg': `
         <svg>
           <path />
         </svg>
@@ -16,15 +20,15 @@ test("copies an SVG from source to target", async (t) => {
   })
 })
 
-test("imports an SVG into a component", async (t) => {
+test('imports an SVG into a component', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "icon.svg": `
+      'icon.svg': `
         <svg>
           <path />
         </svg>
       `,
-      "index.html.jsx": `
+      'index.html.jsx': `
         import Icon from "./icon.svg"
 
         export default () => <Icon />

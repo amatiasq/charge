@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-require = require("esm")(module)
+require = require('esm')(module)
 
-const meow = require("meow")
-const build = require("./lib/build").default
-const serve = require("./lib/serve").default
+const meow = require('meow')
+const build = require('./lib/build').default
+const serve = require('./lib/serve').default
 
 const cli = meow(`
   Usage
@@ -17,13 +17,13 @@ const command = cli.input[0]
 switch (command) {
   case undefined:
     return cli.showHelp()
-  case "build":
+  case 'build':
     return build({
       source: cli.input[1],
       target: cli.input[2],
     })
-  case "serve":
-  case "server":
+  case 'serve':
+  case 'server':
     const serveCLI = meow(
       `
       Usage
@@ -38,7 +38,7 @@ switch (command) {
       {
         flags: {
           port: {
-            type: "number",
+            type: 'number',
           },
         },
       },

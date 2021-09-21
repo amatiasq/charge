@@ -1,41 +1,41 @@
-import test from "ava"
+import test from 'ava'
 import {
   buildAndSnapshotFilesystem,
   createSourceFiles,
   createPackage,
   cleanFiles,
-} from "../helpers/filesystem"
+} from '../helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("bundles JavaScripts into a self-executing function", async (t) => {
+test('bundles JavaScripts into a self-executing function', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.js": `
+      'index.js': `
         console.log("hey")
       `,
     })
   })
 })
 
-test("transpiles JavaScripts using Babel", async (t) => {
+test('transpiles JavaScripts using Babel', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.js": `
+      'index.js': `
         console.log([1, ...[2]])
       `,
     })
   })
 })
 
-test("bundles imported JavaScript files via relative imports to current directory", async (t) => {
+test('bundles imported JavaScript files via relative imports to current directory', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "foo.js": `
+      'foo.js': `
         export default "bar"
       `,
-      "index.js": `
+      'index.js': `
         import foo from  "./foo"
 
         console.log(foo)
@@ -44,13 +44,13 @@ test("bundles imported JavaScript files via relative imports to current director
   })
 })
 
-test("bundles imported JavaScript files via relative imports to parent directory", async (t) => {
+test('bundles imported JavaScript files via relative imports to parent directory', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "foo.js": `
+      'foo.js': `
         export default "bar"
       `,
-      "folder/index.js": `
+      'folder/index.js': `
         import foo from  "../foo"
 
         console.log(foo)
@@ -59,16 +59,16 @@ test("bundles imported JavaScript files via relative imports to parent directory
   })
 })
 
-test("bundles imported npm packages", async (t) => {
+test('bundles imported npm packages', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
-    await createPackage("foo", {
-      "index.js": `
+    await createPackage('foo', {
+      'index.js': `
         export default "bar"
       `,
     })
 
     await createSourceFiles({
-      "index.js": `
+      'index.js': `
         import foo from  "foo"
 
         console.log(foo)

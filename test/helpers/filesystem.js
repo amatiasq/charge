@@ -1,32 +1,35 @@
-import { globSyncNormalize } from "../../lib/utilities"
-import { join as pathJoin, sep as pathSeparator } from "path"
-import fs from "fs-extra"
-import dedent from "dedent"
-import build from "../../lib/build"
+import { globSyncNormalize } from '../../lib/utilities'
+import { join as pathJoin, sep as pathSeparator } from 'path'
+import fs from 'fs-extra'
+import dedent from 'dedent'
+import build from '../../lib/build'
 
-const tmpPathPrefix = pathJoin("tmp", "tests")
-const dataDirectory = pathJoin(tmpPathPrefix, "data")
-const packageDirectory = "node_modules"
-export const sourceDirectory = pathJoin(tmpPathPrefix, "source")
-export const targetDirectory = pathJoin(tmpPathPrefix, "target")
+const tmpPathPrefix = pathJoin('tmp', 'tests')
+const dataDirectory = pathJoin(tmpPathPrefix, 'data')
+const packageDirectory = 'node_modules'
+export const sourceDirectory = pathJoin(tmpPathPrefix, 'source')
+export const targetDirectory = pathJoin(tmpPathPrefix, 'target')
 
 const flattenFilePath = (pathPart, directoryOrFileContents) => {
   pathPart = pathPart.replace(/\//g, pathSeparator)
 
-  return Object.entries(directoryOrFileContents).reduce((flattenedFilePaths, [key, value]) => {
-    const path = pathJoin(pathPart, key)
+  return Object.entries(directoryOrFileContents).reduce(
+    (flattenedFilePaths, [key, value]) => {
+      const path = pathJoin(pathPart, key)
 
-    if (typeof value === "object") {
-      Object.assign(flattenedFilePaths, flattenFilePath(path, value))
-    } else {
-      flattenedFilePaths[path] = value
-    }
+      if (typeof value === 'object') {
+        Object.assign(flattenedFilePaths, flattenFilePath(path, value))
+      } else {
+        flattenedFilePaths[path] = value
+      }
 
-    return flattenedFilePaths
-  }, {})
+      return flattenedFilePaths
+    },
+    {},
+  )
 }
 
-export const createData = async (data) => {
+export const createData = async data => {
   await Promise.all(
     Object.entries(data).map(([namespace, contents]) => {
       const path = pathJoin(dataDirectory, `${namespace}.json`)
@@ -45,11 +48,11 @@ const createFiles = async (directory, files) => {
   )
 }
 
-export const createSourceFiles = async (files) => {
+export const createSourceFiles = async files => {
   await createFiles(sourceDirectory, files)
 }
 
-export const createTargetFiles = async (files) => {
+export const createTargetFiles = async files => {
   await createFiles(targetDirectory, files)
 }
 
@@ -66,14 +69,14 @@ export const cleanFiles = async () => {
   await fs.remove(tmpPathPrefix)
 }
 
-const snapshotDirectoryStructure = (t) => {
+const snapshotDirectoryStructure = t => {
   const files = globSyncNormalize(`${targetDirectory}/**/*`, {
     nodir: true,
   })
 
-  files = files.map((file) => {
-    if (pathSeparator === "\\") {
-      return file.replace(new RegExp(`\\${pathSeparator}`, "g"), "/")
+  files = files.map(file => {
+    if (pathSeparator === '\\') {
+      return file.replace(new RegExp(`\\${pathSeparator}`, 'g'), '/')
     }
 
     return file
@@ -82,14 +85,14 @@ const snapshotDirectoryStructure = (t) => {
   t.snapshot(files)
 }
 
-const snapshotFileContents = (t) => {
+const snapshotFileContents = t => {
   const files = globSyncNormalize(`${targetDirectory}/**/*`, {
     nodir: true,
   })
 
-  files = files.map((file) => {
-    if (pathSeparator === "\\") {
-      return file.replace(new RegExp(`\\${pathSeparator}`, "g"), "/")
+  files = files.map(file => {
+    if (pathSeparator === '\\') {
+      return file.replace(new RegExp(`\\${pathSeparator}`, 'g'), '/')
     }
 
     return file
@@ -104,7 +107,7 @@ const snapshotFileContents = (t) => {
   t.snapshot(targetFilesystem)
 }
 
-const snapshotFilesystem = (t) => {
+const snapshotFilesystem = t => {
   snapshotDirectoryStructure(t)
   snapshotFileContents(t)
 }

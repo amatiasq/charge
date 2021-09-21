@@ -1,46 +1,46 @@
-import test from "ava"
+import test from 'ava'
 import {
   buildAndSnapshotFilesystem,
   createSourceFiles,
   createTargetFiles,
   cleanFiles,
-} from "./helpers/filesystem"
+} from './helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("empties target directory before building", async (t) => {
+test('empties target directory before building', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.html": "<html></html>",
+      'index.html': '<html></html>',
     })
 
     await createTargetFiles({
-      "stale.html": "<html></html>",
+      'stale.html': '<html></html>',
     })
   })
 })
 
-test("copies a file from source to target", async (t) => {
+test('copies a file from source to target', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.html": "<html></html>",
+      'index.html': '<html></html>',
     })
   })
 })
 
-test("handles a file with no extension", async (t) => {
+test('handles a file with no extension', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      CNAME: "foobar.com",
+      CNAME: 'foobar.com',
     })
   })
 })
 
-test("summarizes pages and passes them into the page as the `pages` prop", async (t) => {
+test('summarizes pages and passes them into the page as the `pages` prop', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "foo.html.jsx": `
+      'foo.html.jsx': `
         export default ({ pages }) => (
           <React.Fragment>
             {
@@ -57,10 +57,10 @@ test("summarizes pages and passes them into the page as the `pages` prop", async
   })
 })
 
-test("handles the root index page in the `pages` prop", async (t) => {
+test('handles the root index page in the `pages` prop', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.html.jsx": `
+      'index.html.jsx': `
         export default ({ pages }) => (
           <React.Fragment>
             {
@@ -77,13 +77,13 @@ test("handles the root index page in the `pages` prop", async (t) => {
   })
 })
 
-test("only includes JSX and MDX pages in the `pages` prop", async (t) => {
+test('only includes JSX and MDX pages in the `pages` prop', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.html": `
+      'index.html': `
         <p></p>
       `,
-      "jsx.html.jsx": `
+      'jsx.html.jsx': `
         export default ({ pages }) => (
           <React.Fragment>
             {
@@ -96,20 +96,20 @@ test("only includes JSX and MDX pages in the `pages` prop", async (t) => {
           </React.Fragment>
         )
       `,
-      "mdx.html.mdx": `
+      'mdx.html.mdx': `
         Foobar
       `,
     })
   })
 })
 
-test("passes the page component in the `pages` prop", async (t) => {
+test('passes the page component in the `pages` prop', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "post.html.mdx": `
+      'post.html.mdx': `
         # Title
       `,
-      "index.html.jsx": `
+      'index.html.jsx': `
         export default ({ pages }) => (
           <React.Fragment>
             {
@@ -128,10 +128,10 @@ test("passes the page component in the `pages` prop", async (t) => {
   })
 })
 
-test("provides exported meta for a JSX page in the `pages` prop", async (t) => {
+test('provides exported meta for a JSX page in the `pages` prop', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.html.jsx": `
+      'index.html.jsx': `
         export const meta = {
           foo: "bar"
         }
@@ -152,17 +152,17 @@ test("provides exported meta for a JSX page in the `pages` prop", async (t) => {
   })
 })
 
-test("provides exported meta for an MDX page in the `pages` prop", async (t) => {
+test('provides exported meta for an MDX page in the `pages` prop', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "mdx.html.mdx": `
+      'mdx.html.mdx': `
         export const meta = {
           foo: "bar"
         }
 
         Foobar
       `,
-      "jsx.html.jsx": `
+      'jsx.html.jsx': `
         export const meta = {
           foo: "bar"
         }

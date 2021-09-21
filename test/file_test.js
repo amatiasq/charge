@@ -1,57 +1,57 @@
-import test from "ava"
-import { join as pathJoin } from "path"
-import File from "../lib/file"
+import test from 'ava'
+import { join as pathJoin } from 'path'
+import File from '../lib/file'
 
-test("#extensions handles one extension", async (t) => {
+test('#extensions handles one extension', async t => {
   const file = new File({
-    path: "/",
-    relativePath: "index.html",
+    path: '/',
+    relativePath: 'index.html',
   })
 
-  t.deepEqual(file.extensions, ["html"])
+  t.deepEqual(file.extensions, ['html'])
 })
 
-test("#extensions handles two extensions", async (t) => {
+test('#extensions handles two extensions', async t => {
   const file = new File({
-    path: "/",
-    relativePath: "index.html.jsx",
+    path: '/',
+    relativePath: 'index.html.jsx',
   })
 
-  t.deepEqual(file.extensions, ["html", "jsx"])
+  t.deepEqual(file.extensions, ['html', 'jsx'])
 })
 
-test("#extensions handles a path with a period in it", async (t) => {
+test('#extensions handles a path with a period in it', async t => {
   const file = new File({
-    path: "/",
-    relativePath: pathJoin("test.com", "index.html.jsx"),
+    path: '/',
+    relativePath: pathJoin('test.com', 'index.html.jsx'),
   })
 
-  t.deepEqual(file.extensions, ["html", "jsx"])
+  t.deepEqual(file.extensions, ['html', 'jsx'])
 })
 
-test("#_extension handles one extension", async (t) => {
+test('#_extension handles one extension', async t => {
   const file = new File({
-    path: "/",
-    relativePath: "index.html",
+    path: '/',
+    relativePath: 'index.html',
   })
 
-  t.is(file._extension, ".html")
+  t.is(file._extension, '.html')
 })
 
-test("#_extension handles two extensions", async (t) => {
+test('#_extension handles two extensions', async t => {
   const file = new File({
-    path: "/",
-    relativePath: "index.html.jsx",
+    path: '/',
+    relativePath: 'index.html.jsx',
   })
 
-  t.is(file._extension, ".html.jsx")
+  t.is(file._extension, '.html.jsx')
 })
 
-test("#_extension handles a path with a period in it", async (t) => {
+test('#_extension handles a path with a period in it', async t => {
   const file = new File({
-    path: "/",
-    relativePath: pathJoin("test.com", "index.html.jsx"),
+    path: '/',
+    relativePath: pathJoin('test.com', 'index.html.jsx'),
   })
 
-  t.is(file._extension, ".html.jsx")
+  t.is(file._extension, '.html.jsx')
 })

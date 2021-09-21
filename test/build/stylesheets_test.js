@@ -1,18 +1,18 @@
-import test from "ava"
+import test from 'ava'
 import {
   buildAndSnapshotFilesystem,
   createSourceFiles,
   createPackage,
   cleanFiles,
-} from "../helpers/filesystem"
+} from '../helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("transpiles stylesheets using Stage 2 features", async (t) => {
+test('transpiles stylesheets using Stage 2 features', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.css": `
+      'index.css': `
         body {
           font-family: system-ui;
         }
@@ -21,10 +21,10 @@ test("transpiles stylesheets using Stage 2 features", async (t) => {
   })
 })
 
-test("transpiles stylesheets using thee custom-media-queries feature from Stage 1", async (t) => {
+test('transpiles stylesheets using thee custom-media-queries feature from Stage 1', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "index.css": `
+      'index.css': `
         @custom-media --small-viewport (max-width: 30em);
 
         @media (--small-viewport) {
@@ -37,15 +37,15 @@ test("transpiles stylesheets using thee custom-media-queries feature from Stage 
   })
 })
 
-test("inlines stylesheets with relative @import statements to current directory", async (t) => {
+test('inlines stylesheets with relative @import statements to current directory', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "other.css": `
+      'other.css': `
         p {
           color: red;
         }
       `,
-      "index.css": `
+      'index.css': `
         @import "./other.css";
 
         a {
@@ -56,15 +56,15 @@ test("inlines stylesheets with relative @import statements to current directory"
   })
 })
 
-test("inlines stylesheets with relative @import statements to parent directory", async (t) => {
+test('inlines stylesheets with relative @import statements to parent directory', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
     await createSourceFiles({
-      "other.css": `
+      'other.css': `
         p {
           color: red;
         }
       `,
-      "folder/index.css": `
+      'folder/index.css': `
         @import "../other.css";
 
         a {
@@ -75,10 +75,10 @@ test("inlines stylesheets with relative @import statements to parent directory",
   })
 })
 
-test("inlines stylesheets from npm packages", async (t) => {
+test('inlines stylesheets from npm packages', async t => {
   await buildAndSnapshotFilesystem(t, async () => {
-    await createPackage("foo", {
-      "index.css": `
+    await createPackage('foo', {
+      'index.css': `
         p {
           color: red;
         }
@@ -86,7 +86,7 @@ test("inlines stylesheets from npm packages", async (t) => {
     })
 
     await createSourceFiles({
-      "index.css": `
+      'index.css': `
         @import "foo";
 
         a {

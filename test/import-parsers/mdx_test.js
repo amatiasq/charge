@@ -1,33 +1,33 @@
-import test from "ava"
-import dedent from "dedent"
-import { join as pathJoin } from "path"
-import jsxImportParser from "../../lib/import-parsers/mdx"
+import test from 'ava'
+import dedent from 'dedent'
+import { join as pathJoin } from 'path'
+import jsxImportParser from '../../lib/import-parsers/mdx'
 import {
   createSourceFiles,
   cleanFiles,
   sourceDirectory,
   targetDirectory,
-} from "../helpers/filesystem"
+} from '../helpers/filesystem'
 
-test.beforeEach((t) => cleanFiles())
-test.after.always((t) => cleanFiles())
+test.beforeEach(t => cleanFiles())
+test.after.always(t => cleanFiles())
 
-test("parses no imports", async (t) => {
+test('parses no imports', async t => {
   await createSourceFiles({
-    "index.html.mdx": dedent`
+    'index.html.mdx': dedent`
       # Heading
     `,
   })
 
-  const path = pathJoin(sourceDirectory, "index.html.mdx")
+  const path = pathJoin(sourceDirectory, 'index.html.mdx')
   const imports = jsxImportParser(path)
 
   t.deepEqual(imports, [])
 })
 
-test("parses imports", async (t) => {
+test('parses imports', async t => {
   await createSourceFiles({
-    "index.html.mdx": dedent`
+    'index.html.mdx': dedent`
       import Subheading from "./subheading.html.mdx"
 
       # Heading
@@ -36,8 +36,8 @@ test("parses imports", async (t) => {
     `,
   })
 
-  const path = pathJoin(sourceDirectory, "index.html.mdx")
+  const path = pathJoin(sourceDirectory, 'index.html.mdx')
   const imports = jsxImportParser(path)
 
-  t.deepEqual(imports, [pathJoin(sourceDirectory, "subheading.html.mdx")])
+  t.deepEqual(imports, [pathJoin(sourceDirectory, 'subheading.html.mdx')])
 })
